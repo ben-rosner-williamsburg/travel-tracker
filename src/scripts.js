@@ -6,6 +6,22 @@ import './css/styles.css';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
+import { fetchPromises } from './apiCalls';
+import { getRandomTraveler } from './dataModel';
 
 
-console.log('This is the JavaScript entry file - your code begins here.');
+export let travelers;
+export let singleTraveler;
+export let trips;
+export let destinations;
+window.addEventListener("load", function() {  
+Promise.all(fetchPromises).then((data) => {
+    travelers = data[0].travelers;
+    singleTraveler = data[1];
+    trips = data[2].trips;
+    destinations = data[3].destinations;
+
+    const randomTraveler = getRandomTraveler(travelers);
+    const travelerData = 
+  })
+})

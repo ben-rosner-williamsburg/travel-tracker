@@ -1,12 +1,12 @@
-export const travelers = "http://localhost:3001/api/v1/travelers";
-export const singleTraveler = `http://localhost:3001/api/v1/travelers/${id}`;
-export const trips = "http://localhost:3001/api/v1/trips";
-export const destinations = "http://localhost:3001/api/v1/destinations";
+export const travelers = `http://localhost:3001/api/v1/travelers`;
+export const singleTraveler = `http://localhost:3001/api/v1/travelers/${1}/`;
+export const trips = `http://localhost:3001/api/v1/trips`;
+export const destinations = `http://localhost:3001/api/v1/destinations`;
 
-const endpoints = [travelers, singleTraveler, trips, destinations];
+export const endpoints = [travelers, singleTraveler, trips, destinations];
 
-export const fetchPromises = endpoints.map(url => {
-  fetch(url).then((response) => {
+export const fetchPromises = endpoints.map(endpoint => 
+  fetch(endpoint).then((response) => {
      if (!response.ok) {
       throw new Error(`${response.status} : "Failed to fetch data`);
      }
@@ -16,4 +16,4 @@ export const fetchPromises = endpoints.map(url => {
   }).catch(error => {
       console.error(error);
   })
-})
+)
