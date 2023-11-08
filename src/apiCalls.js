@@ -1,9 +1,11 @@
-export const travelers = `http://localhost:3001/api/v1/travelers`;
-export const singleTraveler = `http://localhost:3001/api/v1/travelers/${1}/`;
-export const trips = `http://localhost:3001/api/v1/trips`;
-export const destinations = `http://localhost:3001/api/v1/destinations`;
+import { singleTraveler, travelerData } from "./scripts";
 
-export const endpoints = [travelers, singleTraveler, trips, destinations];
+export const travelersEndpoint = `http://localhost:3001/api/v1/travelers`;
+export const singleTravelerEndpoint = `http://localhost:3001/api/v1/travelers/${1}/`;
+export const tripsEndpoint = `http://localhost:3001/api/v1/trips`;
+export const destinationsEndpoint = `http://localhost:3001/api/v1/destinations`;
+
+export const endpoints = [travelersEndpoint, singleTravelerEndpoint, tripsEndpoint, destinationsEndpoint];
 
 export const fetchPromises = endpoints.map(endpoint => 
   fetch(endpoint).then((response) => {
