@@ -1,6 +1,3 @@
-import { destinationsEndpoint } from "./apiCalls";
-import { destinations, travelers } from "./scripts";
-
 export const getRandomTraveler = travelers => {
   const travelerInd = Math.floor(Math.random() * travelers.length)
   return travelerInd;
@@ -13,11 +10,13 @@ export const getDataByIndex = (data, index) => {
   return selectedTraveler;
 }
 
-export const filterData = (selectedData, data, id) => {
-  const travelerData = data.filter(data => {
-    return selectedData.id === data[id]
-  })
+export const filterData = (selectedTravelerData, tripData, id) => {
+  if (id > 0){
+    const travelerData = tripData.filter(data => {
+      return selectedTravelerData.id === data.userID
+    })
   return travelerData;
+  }
 }
 
 export const getTripDates = tripsPerTraveler => {

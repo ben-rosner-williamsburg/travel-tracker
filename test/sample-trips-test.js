@@ -1,4 +1,14 @@
-module.exports = [
+export default [
+  {
+    "id": 117,
+    "userID": 1,
+    "destinationID": 28,
+    "travelers": 3,
+    "date": "2021/01/09",
+    "duration": 15,
+    "status": "approved",
+    "suggestedActivities": []
+  }, 
   {
     "id": 1,
     "userID": 44,
@@ -27,4 +37,15 @@ module.exports = [
     "duration": 17,
     "status": "approved",
     "suggestedActivities": []
-  }]
+  },
+  {
+    "id": 4,
+    "userID": 4,
+    "destinationID": 22,
+    "travelers": 4,
+    "date": undefined,
+    "duration": 17,
+    "status": "approved",
+    "suggestedActivities": []
+  }
+]

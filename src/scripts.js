@@ -26,6 +26,7 @@ Promise.all(fetchPromises).then((data) => {
     const randomTravelerIndex = getRandomTraveler(travelers);
     const travelerData = getDataByIndex(travelers, randomTravelerIndex);
     const filterForTrips = filterData(travelerData, trips, "userID");
+    console.log(filterForTrips)
     const tripDates = getTripDates(filterForTrips);
     const destinationIDs = getDestinationIDs(filterForTrips);
     const location = findDestination(destinationIDs, destinations);

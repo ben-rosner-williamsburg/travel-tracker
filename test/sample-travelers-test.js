@@ -1,4 +1,4 @@
-module.exports = [
+export default [
   {
     "id": 1,
     "name": "Ham Leadbeater",
@@ -11,4 +11,10 @@ module.exports = [
     "id": 3,
     "name": "Sibby Dawidowitsch",
     "travelerType": "shopper",
-  }]
+  },
+  {
+    "id": 4,
+    "name": "Lorettalorna Borell",
+    "travelerType": "foodie",
+  }
+]
