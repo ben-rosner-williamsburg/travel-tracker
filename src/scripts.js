@@ -7,7 +7,7 @@ import './css/styles.css';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/turing-logo.png'
 import { fetchPromises } from './apiCalls';
-import { getRandomTraveler, getDataByIndex, filterData, getTripDates, getDestinationIDs, findDestination,  } from './dataModel';
+import { getRandomTraveler, getDataByIndex, filterData, getTripDates, getDestinationIDs, findDestination, getLodgingCost, getFlightCost, getTotalCost } from './dataModel';
 import { displayUserTrips } from './dom';
 
 
@@ -27,8 +27,11 @@ Promise.all(fetchPromises).then((data) => {
     const travelerData = getDataByIndex(travelers, randomTravelerIndex);
     const filterForTrips = filterData(travelerData, trips, "userID");
     const tripDates = getTripDates(filterForTrips);
-    const destinationIDs = getDestinationIDs(filterForTrips)
-    const location = findDestination(destinationIDs, destinations)
-    displayUserTrips(travelerData, tripDates, location, destinations);
+    const destinationIDs = getDestinationIDs(filterForTrips);
+    const location = findDestination(destinationIDs, destinations);
+    const lodgingCosts = getLodgingCost(destinationIDs, trips, destinations);
+    const flightCosts = getFlightCost(destinationIDs, trips, destinations);
+    const totalCost = getTotalCost(lodgingCosts, flightCosts)
+    displayUserTrips(travelerData, tripDates, location, totalCost);
   })
 })

@@ -1,4 +1,5 @@
 import { destinationsEndpoint } from "./apiCalls";
+import { destinations, travelers } from "./scripts";
 
 export const getRandomTraveler = travelers => {
   const travelerInd = Math.floor(Math.random() * travelers.length)
@@ -33,11 +34,63 @@ export const getDestinationIDs = (tripData) => {
 }
 
 export const findDestination = (destinationIDs, destinationData) => {
-    const destinations = destinationIDs.map(id => {
-        const destination = destinationData.find(destination => {
-            return id === destination.id;
-        })
-        return destination.destination;
+  const destinations = destinationIDs.map(id => {
+    const destination = destinationData.find(destination => {
+      return id === destination.id;
     })
-    return destinations
+    return destination.destination;
+  })
+  return destinations;
+}
+
+
+export const getLodgingCost = (selectedDestinations, trips, destinationData) => {
+  const filterForDestination = selectedDestinations.map(id => {
+    const destination = destinationData.find(destination => {
+      return id === destination.id;
+    })
+    return destination;
+  })
+  const lodgingCost = filterForDestination.map(destination => {
+    return destination.estimatedLodgingCostPerDay;
+  })
+  const duration = trips.map(trip => {
+    return trip.duration;
+  })
+  const allLodgingCosts = lodgingCost.reduce((totalLodgingCosts, lodgingCost) => {
+    duration.forEach(tripDuration => {
+      totalLodgingCosts += lodgingCost * tripDuration;
+    })
+    return totalLodgingCosts;
+  }, 0)
+  return allLodgingCosts;
+}
+
+export const getFlightCost = (selectedDestinations, trips, destinationData) => {
+  const filterForDestination = selectedDestinations.map(id => {
+    const destination = destinationData.find(destination => {
+      return id === destination.id;
+    })
+    return destination;
+  })
+  const flightCost = filterForDestination.map(destination => {
+    return destination.estimatedFlightCostPerPerson;
+  })
+  const numOfTravelers = trips.map(trip => {
+    return trip.travelers;
+  })
+  const allFlightCosts = flightCost.reduce((totalFlightCosts, flightCost) => {
+    numOfTravelers.forEach(flights => {
+        totalFlightCosts += flightCost * flights;
+    })
+    return totalFlightCosts;
+  }, 0)
+  return allFlightCosts;
+}
+
+export const getTotalCost = (allLodgingCosts, allFlightCosts) => {
+  let initialCost = allLodgingCosts + allFlightCosts
+  let initialCostFees = initialCost * .10
+  const totalCostWithFees = initialCost + initialCostFees
+  return totalCostWithFees
 }
