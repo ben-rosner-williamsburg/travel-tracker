@@ -89,5 +89,8 @@ export const getFlightCost = (selectedDestinations, trips, destinationData) => {
 }
 
 export const getTotalCost = (allLodgingCosts, allFlightCosts) => {
-  return (allLodgingCosts + allFlightCosts) * .10
+  let initialCost = allLodgingCosts + allFlightCosts
+  let initialCostFees = initialCost * .10
+  const totalCostWithFees = initialCost + initialCostFees
+  return totalCostWithFees
 }
