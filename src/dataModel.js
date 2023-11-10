@@ -47,21 +47,47 @@ export const findDestination = (destinationIDs, destinationData) => {
 export const getLodgingCost = (selectedDestinations, trips, destinationData) => {
   const filterForDestination = selectedDestinations.map(id => {
     const destination = destinationData.find(destination => {
-      return id === destination.id
+      return id === destination.id;
     })
-    return destination
+    return destination;
   })
   const lodgingCost = filterForDestination.map(destination => {
-    return destination.estimatedLodgingCostPerDay
+    return destination.estimatedLodgingCostPerDay;
   })
   const duration = trips.map(trip => {
-    return trip.duration
+    return trip.duration;
   })
   const allLodgingCosts = lodgingCost.reduce((totalLodgingCosts, lodgingCost) => {
     duration.forEach(tripDuration => {
-      totalLodgingCosts += lodgingCost * tripDuration
+      totalLodgingCosts += lodgingCost * tripDuration;
     })
-    return totalLodgingCosts
+    return totalLodgingCosts;
   }, 0)
-  return allLodgingCosts
+  return allLodgingCosts;
+}
+
+export const getFlightCost = (selectedDestinations, trips, destinationData) => {
+  const filterForDestination = selectedDestinations.map(id => {
+    const destination = destinationData.find(destination => {
+      return id === destination.id;
+    })
+    return destination;
+  })
+  const flightCost = filterForDestination.map(destination => {
+    return destination.estimatedFlightCostPerPerson;
+  })
+  const numOfTravelers = trips.map(trip => {
+    return trip.travelers;
+  })
+  const allFlightCosts = flightCost.reduce((totalFlightCosts, flightCost) => {
+    numOfTravelers.forEach(flights => {
+        totalFlightCosts += flightCost * flights;
+    })
+    return totalFlightCosts;
+  }, 0)
+  return allFlightCosts;
+}
+
+export const getTotalCost = (allLodgingCosts, allFlightCosts) => {
+  return (allLodgingCosts + allFlightCosts) * .10
 }
