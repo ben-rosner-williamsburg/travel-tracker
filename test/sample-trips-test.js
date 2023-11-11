@@ -41,9 +41,7 @@ export default [
   {
     "id": 4,
     "userID": 4,
-    "destinationID": 22,
     "travelers": 4,
-    "date": undefined,
     "duration": 17,
     "status": "approved",
     "suggestedActivities": []

@@ -25,14 +25,13 @@ Promise.all(fetchPromises).then((data) => {
 
     const randomTravelerIndex = getRandomTraveler(travelers);
     const travelerData = getDataByIndex(travelers, randomTravelerIndex);
-    const filterForTrips = filterData(travelerData, trips, "userID");
-    console.log(filterForTrips)
+    const filterForTrips = filterData(travelerData, trips)
     const tripDates = getTripDates(filterForTrips);
     const destinationIDs = getDestinationIDs(filterForTrips);
     const location = findDestination(destinationIDs, destinations);
-    const lodgingCosts = getLodgingCost(destinationIDs, trips, destinations);
-    const flightCosts = getFlightCost(destinationIDs, trips, destinations);
-    const totalCost = getTotalCost(lodgingCosts, flightCosts)
+    const lodgingCosts = getLodgingCost(destinationIDs, filterForTrips, destinations);
+    const flightCosts = getFlightCost(destinationIDs, filterForTrips, destinations);
+    const totalCost = getTotalCost(lodgingCosts, flightCosts);
     displayUserTrips(travelerData, tripDates, location, totalCost);
   })
 })

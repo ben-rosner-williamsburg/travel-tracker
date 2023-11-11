@@ -1,11 +1,11 @@
 const nameField = document.querySelector(".name");
 const tripsField = document.querySelector('.trips');
-const locationField = document.querySelector('.location')
+const locationsField = document.querySelector('.location')
 const moneySpentField = document.querySelector(".money-spent");
 
 export const displayUserTrips = (selectedUser, trips, location, totalCost) => {
   nameField.innerText = `Welcome ${selectedUser.name}!`;
-  tripsField.innerText = `Trip Dates: ${trips}`
-  locationField.innerText = `Location of Trips: ${location}`
-  moneySpentField.innerText = `Total Cost of Trips: $${totalCost}`
+  tripsField.innerHTML = `<h4>${trips}</h4>`
+  locationsField.innerHTML = `<h4>${location}</h4>`
+  moneySpentField.innerText = `Total Cost of Trips: $${totalCost}`;
 }
