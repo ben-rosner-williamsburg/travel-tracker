@@ -1,6 +1,3 @@
-import { destinationsEndpoint } from "./apiCalls";
-import { destinations, travelers } from "./scripts";
-
 export const getRandomTraveler = travelers => {
   const travelerInd = Math.floor(Math.random() * travelers.length)
   return travelerInd;
@@ -13,27 +10,39 @@ export const getDataByIndex = (data, index) => {
   return selectedTraveler;
 }
 
-export const filterData = (selectedData, data, id) => {
-  const travelerData = data.filter(data => {
-    return selectedData.id === data[id]
-  })
+export const filterData = (selectedTravelerData, tripData) => {
+  if (typeof selectedTravelerData.id === "number"){
+    const travelerData = tripData.filter(data => {
+      return selectedTravelerData.id === data.userID
+    })
   return travelerData;
+  }
 }
 
 export const getTripDates = tripsPerTraveler => {
-  return tripsPerTraveler.map(trip => {
-    return trip.date;
-  })
-}
+  if (!tripsPerTraveler) {
+    return undefined
+   }
+       const tripDate = tripsPerTraveler.map(trip => {
+          return trip.date;
+        })
+       return tripDate;
+   }
 
 export const getDestinationIDs = (tripData) => {
-  const destinationIDs = tripData.map(location => {
-    return location.destinationID
-  })
-  return destinationIDs
-}
+  if (!tripData) {
+    return undefined;
+  }
+    const destinationIDs = tripData.map(location => {
+        return location.destinationID
+    })
+     return destinationIDs;
+  }
 
 export const findDestination = (destinationIDs, destinationData) => {
+  if (!destinationIDs || !destinationData) {
+    return undefined;
+  }
   const destinations = destinationIDs.map(id => {
     const destination = destinationData.find(destination => {
       return id === destination.id;
@@ -45,6 +54,9 @@ export const findDestination = (destinationIDs, destinationData) => {
 
 
 export const getLodgingCost = (selectedDestinations, trips, destinationData) => {
+  if (selectedDestinations === undefined) {
+    return undefined
+  }
   const filterForDestination = selectedDestinations.map(id => {
     const destination = destinationData.find(destination => {
       return id === destination.id;
@@ -59,7 +71,7 @@ export const getLodgingCost = (selectedDestinations, trips, destinationData) => 
   })
   const allLodgingCosts = lodgingCost.reduce((totalLodgingCosts, lodgingCost) => {
     duration.forEach(tripDuration => {
-      totalLodgingCosts += lodgingCost * tripDuration;
+      totalLodgingCosts += (lodgingCost * tripDuration);
     })
     return totalLodgingCosts;
   }, 0)
@@ -67,6 +79,9 @@ export const getLodgingCost = (selectedDestinations, trips, destinationData) => 
 }
 
 export const getFlightCost = (selectedDestinations, trips, destinationData) => {
+  if (selectedDestinations === undefined) {
+    return undefined
+  }
   const filterForDestination = selectedDestinations.map(id => {
     const destination = destinationData.find(destination => {
       return id === destination.id;
@@ -89,6 +104,9 @@ export const getFlightCost = (selectedDestinations, trips, destinationData) => {
 }
 
 export const getTotalCost = (allLodgingCosts, allFlightCosts) => {
+  if (allLodgingCosts == undefined || allFlightCosts === undefined) {
+    return undefined
+  }
   let initialCost = allLodgingCosts + allFlightCosts
   let initialCostFees = initialCost * .10
   const totalCostWithFees = initialCost + initialCostFees
