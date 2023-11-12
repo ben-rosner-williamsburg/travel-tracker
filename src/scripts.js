@@ -3,9 +3,6 @@
 
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
 import { fetchPromises } from './apiCalls';
 import { getRandomTraveler, getDataByIndex, filterData, getTripDates, getDestinationIDs, findDestination, getLodgingCost, getFlightCost, getTotalCost} from './dataModel';
 import { displayMoneySpent, displayName, displayTrips } from './dom';
@@ -15,6 +12,7 @@ export let travelers;
 export let singleTraveler;
 export let trips;
 export let destinations;
+
 window.addEventListener("load", function() {  
 Promise.all(fetchPromises).then((data) => {
     travelers = data[0].travelers;

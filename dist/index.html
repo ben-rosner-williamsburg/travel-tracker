@@ -4,23 +4,53 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpack Starter Kit</title>
+  <title>Travel Tracker</title>
 </head>
 <body>
   <header class="header-section">
     <h1 class="plane-icon">✈️</h1>
     <h2 class="name"></h2>
+    <h2>Current Travel Planned:</h2>
   </header>
   <main class="main-section">
     <section class="trip-data">
       <section class="trips"></section>
       <section class="location"></section>
     </section>
-    <h3 class="money-spent"></h6>
+    <h3 class="money-spent"></h3>
   </main>
-  
+  <aside class="error hidden"></aside>
+  <section class="form-container form">
+    <h4 class="form-header form">Where to next?</h4>
+    <form action="http://localhost:3001/api/v1/trips" method="post" id="tripForm">
+      <ul class="form">
+        <li class="date-field form-field form">
+          <label for="date">Date:</label>
+          <input type="date" id="date" name="trip_date"/>
+        </li>
+        <li class="duration-field form-field form">
+          <label for="duration">Duration (In Days):</label>
+          <input type="number" id="duration" name="trip_duration"/>
+        </li>
+        <li class="num-travelers-field form-field form">
+          <label for="numberTravelers">Number of Travelers:</label>
+          <input type="number" id="numberTravelers" name="number_travelers"/>
+        </li>
+      </form>
+        <li class="destinations-field form-field form">
+          <label for="destinations">Destination:</label>
+          <select name="destinations" id="destinations" form="tripForm">
+            <option value="lima">Lima, Peru</option>
+            <option value="porto">Porto, Portugal</option>
+            <option value="gabarone">Gabarone, Botswana</option>
+          </select>
+        </li>
+        <li class="button form-field form">
+          <button type="submit" class="form">Submit</button>
+        </li>
+      </ul>
+  </section>
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
-
 </body>
 </html>
