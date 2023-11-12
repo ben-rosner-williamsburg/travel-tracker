@@ -8,7 +8,7 @@ import './css/styles.css';
 import './images/turing-logo.png'
 import { fetchPromises } from './apiCalls';
 import { getRandomTraveler, getDataByIndex, filterData, getTripDates, getDestinationIDs, findDestination, getLodgingCost, getFlightCost, getTotalCost} from './dataModel';
-import { displayName, displayTrips } from './dom';
+import { displayMoneySpent, displayName, displayTrips } from './dom';
 
 
 export let travelers;
@@ -34,5 +34,6 @@ Promise.all(fetchPromises).then((data) => {
     const totalCost = getTotalCost(lodgingCosts, flightCosts);
     displayName(travelerData)
     displayTrips(tripDates, location)
+    displayMoneySpent(totalCost)
   })
 })

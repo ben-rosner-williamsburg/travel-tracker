@@ -17,3 +17,7 @@ export const displayTrips = (trips, locations) => {
     locationsField.innerHTML += `<h1 class="location"> ${location}</h1>`
    })
 }
+
+export const displayMoneySpent = (money) => {
+  moneySpentField.innerText = `Total Spent: $${money}`
+}
