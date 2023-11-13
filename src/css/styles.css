@@ -29,6 +29,10 @@ body {
   letter-spacing: 1.8px;
 }
 
+.field{
+ margin: 10px;
+}
+
 .form-field {
   margin: 10px;
   list-style: none;
