@@ -54,7 +54,6 @@ export const postReq = (data) => {
     console.log(trips)
     const newTripData = filterData(travelerData, trips);
     const newTrip = getNewData(newTripData);
-    const getNewTripDates = getTripDates(newTripData);
     const destinationID = getDestinationIDs(newTripData)
     const newDestinationID = getDestinationIDs(newTrip);
     const locations = findDestination(destinationID, destinations);
@@ -62,9 +61,9 @@ export const postReq = (data) => {
     const flightCost = getFlightCost(newDestinationID, newTrip, destinations);
     const totalCostOfNewTrip = getTotalCost(lodgingCost, flightCost);
     const totalCostOfAllTrips = totalCostOfNewTrip + totalCost;
+    displayTrips(newTripData, locations);
     displayNewTripPrice(totalCostOfNewTrip);
     displayMoneySpent(totalCostOfAllTrips);
-    displayTrips(getNewTripDates, locations, trips);
   })
   .catch(error => {
     console.error(error.message)
