@@ -7,22 +7,22 @@
   <title>Travel Tracker</title>
 </head>
 <body>
-  <header class="header-section">
+  <header tabindex="0" class="header-section">
     <h1 class="plane-icon">✈️</h1>
     <h2 class="name"></h2>
-    <h2>Current Travel Planned:</h2>
+    <h2 >Current Travel Planned:</h2>
   </header>
   <main class="main-section">
-    <section class="trip-data">
+    <section tabIndex="0" class="trip-data">
       <section class="trips field"></section>
       <section class="location field"></section>
       <section class="status field"></section>
     </section>
-    <h3 class="money-spent"></h3>
+    <h3 tabIndex="0" class="money-spent"></h3>
   </main>
   <aside class="error hidden"></aside>
   <section class="form-container form">
-    <h4 class="form-header form">Where to next?</h4>
+    <h4 tabIndclass="form-header form">Where to next?</h4>
     <h4 class="new-trip-price"></h4>
     <form action="http://localhost:3001/api/v1/trips" method="post" enctype="application/json" id="tripForm">
       <ul class="form">
