@@ -3,18 +3,19 @@
 
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
-import { fetchPromises } from './apiCalls';
+import { fetchPromises, sendData } from './apiCalls';
 import { getRandomTraveler, getDataByIndex, filterData, getTripDates, getDestinationIDs, findDestination, getLodgingCost, getFlightCost, getTotalCost} from './dataModel';
-import { displayMoneySpent, displayName, displayTrips } from './dom';
+import { displayMoneySpent, displayName, displayTrips, submitButton } from './dom';
 
 
 export let travelers;
 export let singleTraveler;
 export let trips;
 export let destinations;
+export let travelerData;
+
+const submit = document.querySelector('#submitButton')
+
 window.addEventListener("load", function() {  
 Promise.all(fetchPromises).then((data) => {
     travelers = data[0].travelers;
@@ -22,9 +23,8 @@ Promise.all(fetchPromises).then((data) => {
     trips = data[2].trips;
     destinations = data[3].destinations;
 
-
     const randomTravelerIndex = getRandomTraveler(travelers);
-    const travelerData = getDataByIndex(travelers, randomTravelerIndex);
+    travelerData = getDataByIndex(travelers, randomTravelerIndex);
     const filterForTrips = filterData(travelerData, trips)
     const tripDates = getTripDates(filterForTrips);
     const destinationIDs = getDestinationIDs(filterForTrips);
@@ -36,4 +36,9 @@ Promise.all(fetchPromises).then((data) => {
     displayTrips(tripDates, location)
     displayMoneySpent(totalCost)
   })
+})
+
+submit.addEventListener("click", function(event){
+  event.preventDefault();
+  sendData(travelerData, trips);
 })
