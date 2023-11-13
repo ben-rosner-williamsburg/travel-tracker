@@ -11,33 +11,33 @@ export const getDataByIndex = (data, index) => {
 }
 
 export const filterData = (selectedTravelerData, tripData) => {
-  if (typeof selectedTravelerData.id === "number"){
+  if (typeof selectedTravelerData.id === "number") {
     const travelerData = tripData.filter(data => {
       return selectedTravelerData.id === data.userID
     })
-  return travelerData;
+    return travelerData;
   }
 }
 
 export const getTripDates = tripsPerTraveler => {
   if (!tripsPerTraveler) {
     return undefined
-   }
-       const tripDate = tripsPerTraveler.map(trip => {
-          return trip.date;
-        })
-       return tripDate;
-   }
+  }
+  const tripDate = tripsPerTraveler.map(trip => {
+    return trip.date;
+  })
+  return tripDate;
+}
 
 export const getDestinationIDs = (tripData) => {
   if (!tripData) {
     return undefined;
   }
-    const destinationIDs = tripData.map(location => {
-        return location.destinationID
-    })
-     return destinationIDs;
-  }
+  const destinationIDs = tripData.map(location => {
+    return location.destinationID
+  })
+  return destinationIDs;
+}
 
 export const findDestination = (destinationIDs, destinationData) => {
   if (!destinationIDs || !destinationData) {
@@ -96,7 +96,7 @@ export const getFlightCost = (selectedDestinations, trips, destinationData) => {
   })
   const allFlightCosts = flightCost.reduce((totalFlightCosts, flightCost) => {
     numOfTravelers.forEach(flights => {
-        totalFlightCosts += flightCost * flights;
+      totalFlightCosts += flightCost * flights;
     })
     return totalFlightCosts;
   }, 0)
@@ -110,10 +110,11 @@ export const getTotalCost = (allLodgingCosts, allFlightCosts) => {
   let initialCost = allLodgingCosts + allFlightCosts
   let initialCostFees = initialCost * .10
   const totalCostWithFees = initialCost + initialCostFees
-  return totalCostWithFees
+  const roundedCost = Math.round(totalCostWithFees)
+  return roundedCost
 }
 
 export const getNewData = (dataset) => {
- const sortedData =  dataset.sort((a, b) => new Date(a.date) - new Date(b.date))
- return [sortedData[dataset.length - 1]];
+  const sortedData = dataset.sort((a, b) => new Date(a.date) - new Date(b.date))
+  return [sortedData[dataset.length - 1]];
 }
