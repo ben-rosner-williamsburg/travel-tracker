@@ -51,7 +51,6 @@ export const postReq = (data) => {
   .then(json => {
     clearDashboard()
     trips.push(json.newTrip);
-    console.log(trips)
     const newTripData = filterData(travelerData, trips);
     const newTrip = getNewData(newTripData);
     const destinationID = getDestinationIDs(newTripData)
