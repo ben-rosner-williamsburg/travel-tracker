@@ -1,5 +1,5 @@
-import { filterData, findDestination, getDestinationIDs, getTripDates} from "./dataModel";
-import { appendTrip, clearDashboard, displayTrips } from "./dom";
+import { filterData, findDestination, getDestinationIDs, getFlightCost, getLodgingCost, getTripDates, getNewData, getTotalCost} from "./dataModel";
+import { clearDashboard, displayNewTripPrice, displayTrips, appendTrip } from "./dom";
 import {travelerData, destinations, trips } from "./scripts";
 
 
@@ -52,10 +52,16 @@ export const postReq = (data) => {
     clearDashboard()
     trips.push(json.newTrip);
     const newTripData = filterData(travelerData, trips);
+    const newTrip = getNewData(newTripData);
     const getNewTripDates = getTripDates(newTripData);
-    const destinationIDs = getDestinationIDs(newTripData);
-    const locations = findDestination(destinationIDs, destinations);
-    displayTrips(getNewTripDates, locations);
+    const destinationID = getDestinationIDs(newTripData)
+    const newDestinationID = getDestinationIDs(newTrip);
+    const locations = findDestination(destinationID, destinations);
+    const lodgingCost = getLodgingCost(newDestinationID, newTrip, destinations);
+    const flightCost = getFlightCost(newDestinationID, newTrip, destinations);
+    const totalCostOfNewTrip = getTotalCost(lodgingCost, flightCost);
+    displayTrips(getNewTripDates, locations)
+    displayNewTripPrice(totalCostOfNewTrip);
   })
   .catch(error => {
     console.error(error.message)
