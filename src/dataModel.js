@@ -112,3 +112,8 @@ export const getTotalCost = (allLodgingCosts, allFlightCosts) => {
   const totalCostWithFees = initialCost + initialCostFees
   return totalCostWithFees
 }
+
+export const getNewData = (dataset) => {
+ const sortedData =  dataset.sort((a, b) => new Date(a.date) - new Date(b.date))
+ return sortedData[dataset.length - 1];
+}

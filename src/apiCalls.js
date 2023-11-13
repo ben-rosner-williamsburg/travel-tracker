@@ -1,4 +1,8 @@
-import { trips } from "./scripts";
+import { filterData, findDestination, getDestinationIDs, getTripDates} from "./dataModel";
+import { appendTrip, clearDashboard, displayTrips } from "./dom";
+import {travelerData, destinations, trips } from "./scripts";
+
+
 
 export const travelersEndpoint = `http://localhost:3001/api/v1/travelers`;
 export const singleTravelerEndpoint = `http://localhost:3001/api/v1/travelers/${1}/`;
@@ -25,7 +29,7 @@ export const fetchPromises = endpoints.map(endpoint =>
         errorMessage.classList.remove("hidden");
       }
       else {
-        alert(error.message);
+       console.error(error.message);
       }
   })
 );
@@ -39,17 +43,44 @@ export const postReq = (data) => {
     }
   })
   .then((response) => {
-    if(!response.ok) {
+    if (!response.ok) {
       throw new Error (`${response.status} - Failed to fetch data.`)
     }
     return response.json()
   })
   .then(json => {
-    trips.push(json);
-    console.log(trips, `inside POST func`);
+    clearDashboard()
+    trips.push(json.newTrip);
+    const newTripData = filterData(travelerData, trips);
+    const getNewTripDates = getTripDates(newTripData);
+    const destinationIDs = getDestinationIDs(newTripData);
+    const locations = findDestination(destinationIDs, destinations);
+    displayTrips(getNewTripDates, locations);
+  })
+  .catch(error => {
+    console.error(error.message)
   })
 }
 
-export const sendData = (currentData) => {
-  let duration = parseInt(du)
+export const sendData = (currentData, trips) => {
+  let tripDuration = parseInt(duration.value)
+  let id = trips.length + 1
+  if(!isNaN(new Date(date.value)) && !isNaN(tripDuration) && tripDuration <= 30 && tripDuration){
+    const payload ={
+      id: id,
+      userID: currentData.id,
+      destinationID: parseInt(destinationPicker.value),
+      travelers: parseInt(numberTravelers.value),
+      date: date.value,
+      duration: tripDuration,
+      status: "pending",
+      suggestedActivities: []
+    }
+    postReq(payload);
+    return payload;
+  }
+  else {
+    errorMessage.classList.toggle("hidden");
+    errorMessage.innerText = "One or more was inputted incorrectly: Incorrect date format and/or number out of range"
+  }
 }
