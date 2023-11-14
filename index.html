@@ -4,9 +4,6 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
   <title>Travel Tracker</title>
 </head>
 <body>
@@ -21,8 +18,8 @@
   <section class="hidden main-screen">
     <header tabindex="0" class="header-section">
       <h1 class="plane-icon">✈️</h1>
-      <h2 class="name text"></h2>
-      <h2 class="text">Current Travel Planned:</h2>
+      <h2 class="name"></h2>
+      <h2>Current Travel Planned:</h2>
     </header>
     <article class="main-section">
       <section tabIndex="0" class="trip-data text">
@@ -33,7 +30,7 @@
       <h2 tabIndex="0" class="money-spent text"></h2>
     <section class="error text hidden"></section>
     </article>
-    <section class="form-container text">
+    <section class="form-container form text">
       <h2 tabIndclass="form-header form">Where to next?</h2>
       <h3 class="new-trip-price"></h3>
       <form action="http://localhost:3001/api/v1/trips" method="post" enctype="application/json" id="tripForm">
@@ -53,7 +50,7 @@
       </form>
       <li class="destinations-field form-field form">
         <label for="destinations">Destination:</label>
-        <select name="destinations" id="destinationPicker" form="tripForm"  class="form-field" aria-label="destination-picker">
+        <select name="destinations" id="destinationPicker" form="tripForm" aria-label="destination-picker">
           <option value="1">Lima, Peru</option>
           <option value="2">Stockholm, Sweden</option>
           <option value="3">Sydney, Australia</option>
