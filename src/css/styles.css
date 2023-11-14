@@ -22,7 +22,7 @@ body {
   padding: 10px;
 }
 
-.trip-data, .form {
+.trip-data, .form, .error{
   font-family: 'Courier New', Courier, monospace;
   color: black;
   font-size: 18px;
@@ -55,6 +55,10 @@ body {
   height: 1000px;
 }
 
+.error {
+ height: 400px;
+ width: 400px;
+}
 
 .hidden {
   display: none;
@@ -65,3 +69,4 @@ body {
   background-color: #5928ed;
   color: white;
 }
+
