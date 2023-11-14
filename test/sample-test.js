@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { filterData, findDestination, getDestinationIDs, getLodgingCost, getFlightCost, getTotalCost } from '../src/dataModel';
+import { filterData, findDestination, getDestinationIDs, getLodgingCost, getFlightCost, getTotalCost, getNewData } from '../src/dataModel';
 import sampleTravelers from './sample-travelers-test.js';
 import sampleTrips from './sample-trips-test.js'
 import sampleDestinations from "./sample-destinations-test.js"
@@ -123,5 +123,27 @@ describe('getTotalCost', function () {
   it('should be a number', () => {
     const totalCost = getTotalCost(lodgingCost, flightCost);
     expect(totalCost).to.be.a("number");
+  })
+})
+describe('getNewData', function () {
+  it('should sort the dataset and return the last item', () => {
+    const sortedData = getNewData(trips);
+    const expectedData = [
+      {
+        "id": 2,
+        "userID": 35,
+        "destinationID": 25,
+        "travelers": 5,
+        "date": "2022/10/04",
+        "duration": 18,
+        "status": "approved",
+        "suggestedActivities": []
+      }
+    ]
+    expect(sortedData).to.deep.equal(expectedData)
+  })
+  it('should be an array', () => {
+    const sortedData = getNewData(trips);
+    expect(sortedData).to.be.an("array");
   })
 })
