@@ -13,18 +13,18 @@ export const displayName = (selectedUser) => {
 export const clearDashboard = () => {
   tripsField.innerHTML = "";
   locationsField.innerHTML = "";
-  statusField.innerHTML = ""
+  statusField.innerHTML = "";
 }
 export const displayTrips = (trips, destinations) => {
-    trips.forEach(trip => {
-      tripsField.innerHTML += `<h1 class="trips"> ${trip.date} </h1>` ;
-      statusField.innerHTML += `<h1 class="status"> (${trip.status}) </h1>`
-    })
-    destinations.forEach(destination => {
-      locationsField.innerHTML += `<h1 class="location"> ${destination} </h1>`;
-   })
+  trips.forEach(trip => {
+    tripsField.innerHTML += `<h1 class="trips"> ${trip.date} </h1>`;
+    statusField.innerHTML += `<h1 class="status"> (${trip.status}) </h1>`;
+  })
+  destinations.forEach(destination => {
+    locationsField.innerHTML += `<h1 class="location"> ${destination} </h1>`;
+  })
 }
- 
+
 export const displayMoneySpent = (money) => {
   moneySpentField.innerText = `Total Spent: $${money}`;
 }
