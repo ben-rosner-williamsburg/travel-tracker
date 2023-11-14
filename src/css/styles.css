@@ -29,9 +29,10 @@ body {
   letter-spacing: 1.8px;
 }
 
-.field{
+.field {
  margin: 10px;
 }
+
 
 .form-field {
   margin: 10px;
@@ -50,7 +51,17 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  height: 1000px;
 }
+
+
 .hidden {
   display: none;
+}
+
+.submit-login-button {
+  border-radius: 10px;
+  background-color: #5928ed;
+  color: white;
 }

@@ -10,13 +10,17 @@ export const getDataByIndex = (data, index) => {
   return selectedTraveler;
 }
 
+export const getId = (username) => {
+  const splitUsernameId = username.value.split("traveler");
+  const id = parseInt(splitUsernameId[1]);
+  return id;
+}
+
 export const filterData = (selectedTravelerData, tripData) => {
-  if (typeof selectedTravelerData.id === "number") {
     const travelerData = tripData.filter(data => {
       return selectedTravelerData.id === data.userID
     })
     return travelerData;
-  }
 }
 
 export const getTripDates = tripsPerTraveler => {
