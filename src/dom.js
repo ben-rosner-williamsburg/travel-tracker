@@ -17,11 +17,11 @@ export const clearDashboard = () => {
 }
 export const displayTrips = (trips, destinations) => {
   trips.forEach(trip => {
-    tripsField.innerHTML += `<h1 class="trips"> ${trip.date} </h1>`;
-    statusField.innerHTML += `<h1 class="status"> (${trip.status}) </h1>`;
+    tripsField.innerHTML += `<h1 class="trips text"> ${trip.date} </h1>`;
+    statusField.innerHTML += `<h1 class="status text"> (${trip.status}) </h1>`;
   })
   destinations.forEach(destination => {
-    locationsField.innerHTML += `<h1 class="location"> ${destination} </h1>`;
+    locationsField.innerHTML += `<h1 class="location text"> ${destination} </h1>`;
   })
 }
 
