@@ -37,13 +37,14 @@ export default [
     "duration": 17,
     "status": "approved",
     "suggestedActivities": []
-  },
-  {
+  }, {
     "id": 4,
-    "userID": 4,
-    "travelers": 4,
-    "duration": 17,
+    "userID": 43,
+    "destinationID": 14,
+    "travelers": 2,
+    "date": "2022/02/25",
+    "duration": 10,
     "status": "approved",
     "suggestedActivities": []
-  }
+  },
 ]

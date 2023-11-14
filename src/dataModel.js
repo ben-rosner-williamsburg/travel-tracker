@@ -11,13 +11,6 @@ export const filterData = (selectedTravelerData, tripData) => {
   return travelerData;
 }
 
-export const getTripDates = tripsPerTraveler => {
-  const tripDate = tripsPerTraveler.map(trip => {
-    return trip.date;
-  })
-  return tripDate;
-}
-
 export const getDestinationIDs = (tripData) => {
   const destinationIDs = tripData.map(location => {
     return location.destinationID;

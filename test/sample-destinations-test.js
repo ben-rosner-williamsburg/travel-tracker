@@ -1,6 +1,6 @@
 export default [
   {
-    "id": 1,
+    "id": 28,
     "destination": "Lima, Peru",
     "estimatedLodgingCostPerDay": 70,
     "estimatedFlightCostPerPerson": 400,
@@ -8,7 +8,7 @@ export default [
     "alt": "overview of city buildings with a clear sky"
   },
   {
-    "id": 2,
+    "id": 49,
     "destination": "Stockholm, Sweden",
     "estimatedLodgingCostPerDay": 100,
     "estimatedFlightCostPerPerson": 780,
@@ -16,7 +16,7 @@ export default [
     "alt": "city with boats on the water during the day time"
   },
   {
-    "id": 22,
+    "id": 25,
     "destination": "Sydney, Austrailia",
     "estimatedLodgingCostPerDay": 130,
     "estimatedFlightCostPerPerson": 950,

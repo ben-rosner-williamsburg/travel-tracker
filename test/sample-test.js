@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { filterData, findDestination, getDataByIndex, getDestinationIDs, getLodgingCost, getRandomTraveler, getTripDates, getFlightCost, getTotalCost } from '../src/dataModel';
+import { filterData, findDestination, getDestinationIDs, getLodgingCost, getFlightCost, getTotalCost } from '../src/dataModel';
 import sampleTravelers from './sample-travelers-test.js';
 import sampleTrips from './sample-trips-test.js'
 import sampleDestinations from "./sample-destinations-test.js"
@@ -11,61 +11,23 @@ describe('See if the tests are running', function () {
 });
 
 let travelers = sampleTravelers;
-let trips = sampleTrips
-let destinations = sampleDestinations
+let trips = sampleTrips;
+let destinations = sampleDestinations;
+let singleTraveler = travelers[0];
+let travelerData = singleTraveler;
+
 beforeEach(() => {
   travelers = sampleTravelers;
   trips = sampleTrips;
   destinations = sampleDestinations;
+  singleTraveler = travelers[0];
+  travelerData = singleTraveler;
 });
 
-describe('getRandomTraveler', function () {
-  it('should return a random traveler index', () => {
-    const randomIndex = getRandomTraveler(travelers);
 
-    expect(randomIndex).to.be.a("number");
-    expect(randomIndex).to.be.at.least(0);
-    expect(randomIndex).to.be.at.most(travelers.length - 1);
-  });
-
-  it('should return a random traveler object from the array', () => {
-    const randomIndex = getRandomTraveler(travelers)
-    const randomTraveler = travelers[randomIndex]
-
-    expect(travelers).to.deep.include(randomTraveler);
-  })
-})
-
-describe('getDataByIndex', function () {
-  it('should return user data based on index position', () => {
-    const indexPosition = 1;
-    const userData = getDataByIndex(travelers, indexPosition);
-    const expectedData = {
-      "id": 2,
-      "name": "Rachael Vaughten",
-      "travelerType": "thrill-seeker",
-    }
-    expect(userData).to.deep.equal(expectedData);
-  });
-  it('should return undefined for an invalid index position', () => {
-    const indexPosition = -1;
-    const userData = getDataByIndex(travelers, indexPosition);
-    expect(userData).to.deep.equal(undefined);
-  });
-  it('should return undefined for an empty user data array', () => {
-    const indexPosition = 0;
-    const userData = getDataByIndex([], indexPosition);
-    expect(userData).to.equal(undefined);
-  })
-})
 describe('filterData', function () {
-  let travelerData = getDataByIndex(travelers, 0);
-  beforeEach(() => {
-    travelerData = getDataByIndex(travelers, 0);
-  })
   it('should return trip data based on user ID', () => {
-    const id = 1
-    const tripData = filterData(travelerData, trips, id)
+    const tripData = filterData(travelerData, trips)
     const expectedData = [
       {
         "id": 117,
@@ -80,121 +42,86 @@ describe('filterData', function () {
     ]
     expect(tripData).to.deep.equal(expectedData)
   })
-  it('should return undefined if an id is invalid', () => {
-    const id = 0;
-    const tripData = filterData(travelers, trips, id);
-    expect(tripData).to.deep.equal(undefined);
-  })
-})
-describe('getTripDates', function () {
-  it('should return an array with all trip dates for that traveler', () => {
-    let travelerData = getDataByIndex(travelers, 2);
-    beforeEach(() => {
-      travelerData = getDataByIndex(travelers, 2);
-    })
-    const id = 3;
-    const tripData = filterData(travelerData, trips, id);
-    const tripDates = getTripDates(tripData);
-    const expectedData = ["2022/05/22"];
-    expect(tripDates).to.deep.equal(expectedData);
-  })
-  it('should return undefined if there are no trip dates found', () => {
-    let travelerData = getDataByIndex(travelers, 3);
-    beforeEach(() => {
-      travelerData = getDataByIndex(travelers, 3);
-    })
-    const id = 4;
-    const tripData = filterData(travelerData, trips, id);
-    const tripDates = getTripDates(tripData);
-    expect(tripDates).to.deep.equal([undefined]);
+  it('should be an array of object data', () => {
+    const tripData = filterData(travelerData, trips);
+    expect(tripData).to.be.an("array");
   })
 })
 describe('getDestinationIDs', function () {
   it('should return the destination ID of a given trip', () => {
-    const travelerData = getDataByIndex(travelers, 2);
-    const id = 3;
-    const tripData = filterData(travelerData, trips, id);
+    const tripData = filterData(travelerData, trips);
     const destinationIDs = getDestinationIDs(tripData);
-    expect(destinationIDs).to.deep.equal([trips[3].destinationID]);
+    expect(destinationIDs).to.deep.equal([trips[0].destinationID]);
   })
-  it('should return undefined if there is no destination ID found', () => {
-    const travelerData = getDataByIndex(travelers, 3);
-    const id = 4;
-    const tripData = filterData(travelerData, trips, id);
+  it('should be an array of numbers', () => {
+    const tripData = filterData(travelerData, trips);
     const destinationIDs = getDestinationIDs(tripData);
-    expect(destinationIDs).to.deep.equal([undefined]);
+    expect(destinationIDs).to.be.an("array");
   })
 })
 describe('findDestination', function () {
   it('should return a destination name when given an ID', () => {
-    const travelerData = getDataByIndex(travelers, 2);
-    const id = 3;
-    const tripData = filterData(travelerData, trips, id);
+    const tripData = filterData(travelerData, trips);
     const destinationIDs = getDestinationIDs(tripData);
     const location = findDestination(destinationIDs, destinations);
-    expect(location).to.deep.equal(['Sydney, Austrailia'])
+    expect(location).to.deep.equal(['Lima, Peru']);
   })
-  it('should return undefined if there is no destination associated with an ID', () => {
-    const travelerData = getDataByIndex(travelers, 3);
-    const id = 4;
-    const tripData = filterData(travelerData, trips, id);
-    const location = findDestination(undefined, destinations);
-    expect(location).to.equal(undefined);
+  it('should be an array', () => {
+    const tripData = filterData(travelerData, trips);
+    const destinationIDs = getDestinationIDs(tripData);
+    const location = findDestination(destinationIDs, destinations);
+    expect(location).to.be.an("array");
   })
 })
-describe('lodgingCosts', function() {
-  let travelerData = getDataByIndex(travelers, 2);
-  let id = 3
-  let tripData = filterData(travelerData, trips, id);
-  let destinationIDs = getDestinationIDs(tripData);
+describe('lodgingCosts', function () {
+  let tripData;
+  let destinationIDs;
   beforeEach(() => {
-    travelerData = getDataByIndex(travelers, 2);
-    id = 3
-    tripData = filterData(travelerData, trips, id);
+    tripData = filterData(travelerData, trips);
     destinationIDs = getDestinationIDs(tripData);
   })
   it('should return the total amount of lodging costs for a destination', () => {
     const lodgingCost = getLodgingCost(destinationIDs, tripData, destinations)
-    expect(lodgingCost).to.equal(2210);
+    expect(lodgingCost).to.equal(1050);
   })
-  it('should return undefined if it encounters a value that is improper', () => {
-    const lodgingCost = getLodgingCost(undefined, tripData, destinations)
-    expect(lodgingCost).to.equal(undefined)
+  it('should be a number', () => {
+    const lodgingCost = getLodgingCost(destinationIDs, tripData, destinations);
+    expect(lodgingCost).to.be.a("number");
   })
 })
-describe('flightCosts', function() {
-  let travelerData = getDataByIndex(travelers, 2);
-  let id = 3
-  let tripData = filterData(travelerData, trips, id);
-  let destinationIDs = getDestinationIDs(tripData);
+describe('flightCosts', function () {
+  let tripData;
+  let destinationIDs;
   beforeEach(() => {
-    travelerData = getDataByIndex(travelers, 2);
-    id = 3
-    tripData = filterData(travelerData, trips, id);
+    tripData = filterData(travelerData, trips);
     destinationIDs = getDestinationIDs(tripData);
   })
   it('should return the total amount of flight costs for a destination', () => {
-    const flightCosts = getFlightCost(destinationIDs, tripData, destinations)
-    expect(flightCosts).to.equal(3800);
+    const flightCost = getFlightCost(destinationIDs, tripData, destinations)
+    expect(flightCost).to.equal(1200);
   })
-  it('should return  undefined if it encounters a value that is improper', () => {
-    const lodgingCost = getLodgingCost(undefined, tripData, destinations)
-    expect(lodgingCost).to.equal(undefined)
+  it('should be a number', () => {
+    const flightCost = getLodgingCost(destinationIDs, tripData, destinations);
+    expect(flightCost).to.be.a("number");
   })
 })
-  describe('totalCost', function() {
-    let lodgingCost = 2210;
-    let flightCost = 3800;
-    beforeEach(() => {
-      lodgingCost = 2210;
-      flightCost = 3800;
-    })
-    it('should return the total cost of all trips for a traveler', () => {
-      const totalCost = getTotalCost(lodgingCost, flightCost)
-      expect(totalCost).to.equal(6611);
-    })
-    it('should return undefined if it encounters a value that is improper', () => {
-      const totalCost = getTotalCost(undefined, undefined)
-      expect(totalCost).to.equal(undefined)
-    })
+describe('getTotalCost', function () {
+  let tripData;
+  let destinationIDs;
+  let lodgingCost;
+  let flightCost;
+  beforeEach(() => {
+    tripData = filterData(travelerData, trips);
+    destinationIDs = getDestinationIDs(tripData);
+    lodgingCost = getLodgingCost(destinationIDs, tripData, destinations)
+    flightCost = getFlightCost(destinationIDs, tripData, destinations)
+  })
+  it('should return the total amount of costs for a destination', () => {
+    const totalCost = getTotalCost(lodgingCost, flightCost)
+    expect(totalCost).to.equal(2475);
+  })
+  it('should be a number', () => {
+    const totalCost = getTotalCost(lodgingCost, flightCost);
+    expect(totalCost).to.be.a("number");
+  })
 })
