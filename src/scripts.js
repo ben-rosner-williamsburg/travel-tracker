@@ -1,6 +1,6 @@
 import './css/styles.css';
 import { fetchPromises, fetchSingleTraveler, sendData } from './apiCalls';
-import { filterData, getDestinationIDs, findDestination, getLodgingCost, getFlightCost, getTotalCost, getId } from './dataModel';
+import { filterData, getDestinationIDs, findDestination, getLodgingCost, getFlightCost, getTotalCost, getId, getNewData } from './dataModel';
 import { displayMoneySpent, displayName, displayTrips } from './dom';
 
 
@@ -30,6 +30,7 @@ loginForm.addEventListener('submit', function (event) {
   Promise.all([fetchSingleTraveler(id)]).then((data) => {
     singleTraveler = data[0];
     const filterForTrips = filterData(singleTraveler, trips);
+    getNewData(filterForTrips);
     const destinationIDs = getDestinationIDs(filterForTrips);
     const location = findDestination(destinationIDs, destinations);
     const lodgingCosts = getLodgingCost(destinationIDs, filterForTrips, destinations);
