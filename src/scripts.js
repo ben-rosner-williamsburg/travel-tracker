@@ -30,6 +30,7 @@ loginForm.addEventListener('submit', function (event) {
   Promise.all([fetchSingleTraveler(id)]).then((data) => {
     singleTraveler = data[0];
     const filterForTrips = filterData(singleTraveler, trips);
+    getNewData(filterForTrips);
     const destinationIDs = getDestinationIDs(filterForTrips);
     const location = findDestination(destinationIDs, destinations);
     const lodgingCosts = getLodgingCost(destinationIDs, filterForTrips, destinations);
