@@ -1,6 +1,6 @@
 import './css/styles.css';
 import { fetchPromises, fetchSingleTraveler, sendData } from './apiCalls';
-import { filterData, getDestinationIDs, findDestination, getLodgingCost, getFlightCost, getTotalCost, getId } from './dataModel';
+import { filterData, getDestinationIDs, findDestination, getLodgingCost, getFlightCost, getTotalCost, getId, getNewData } from './dataModel';
 import { displayMoneySpent, displayName, displayTrips } from './dom';
 
 
