@@ -68,6 +68,7 @@ export const postReq = (data) => {
     })
     .then(json => {
       clearDashboard();
+      fetchPromises;
       trips.push(json.newTrip);
       const newTripData = filterData(singleTraveler, trips);
       const newTrip = getNewData(newTripData);
